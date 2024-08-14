@@ -1,0 +1,32 @@
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  opacity: 0.5;
+  padding: 5px;
+  border-radius: 5px;
+  width: 1000px;
+}
+
+.search-bar input {
+  width: 99%;
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 5px;
+}
+
+.all-button, .mode-button {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

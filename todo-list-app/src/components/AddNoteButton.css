@@ -1,0 +1,16 @@
+.add-note-button {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  border: none;
+  color: white;
+  width: 50px; /* Set a fixed width */
+  height: 50px; /* Set a fixed height */
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
