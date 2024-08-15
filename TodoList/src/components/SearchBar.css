@@ -6,27 +6,89 @@
 }
 
 .search-bar {
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  opacity: 0.5;
-  padding: 5px;
+  background: none; /* No background color */
+  padding: 10px;
   border-radius: 5px;
-  width: 1000px;
+  width: 50%; /* Adjust the width to 50% */
+  display: flex;
+  align-items: center;
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #6a11cb, #2575fc) 1; /* Gradient border */
+  position: relative;
 }
 
 .search-bar input {
-  width: 99%;
+  width: 100%;
   border: none;
   background: transparent;
-  color: white;
+  color: inherit; /* Use inherited color for light/dark mode */
   padding: 5px;
+  outline: none;
 }
 
-.all-button, .mode-button {
+.search-bar input::placeholder {
+  color: inherit; /* Use inherited color for placeholder */
+}
+
+.search-icon {
+  margin-right: 8px;
+  color: inherit; /* Use inherited color for light/dark mode */
+  cursor: pointer; /* Make icon clickable */
+}
+
+
+.all-button,
+.mode-button {
   background: linear-gradient(45deg, #6a11cb, #2575fc);
   border: none;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 15px;
   margin-left: 10px;
   border-radius: 5px;
   cursor: pointer;
+  position: relative;
+}
+
+.dropdown-container {
+  position: relative;
+  margin-left: 10px;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #6a11cb;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.dropdown-item {
+  padding: 10px;
+  text-align: left;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: white;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(45deg, #5a0cb7, #1565c0);
+}
+
+/* Dark Mode Specific Styles */
+body.dark-mode .search-bar {
+  border-image: linear-gradient(45deg, #3a0f71, #0b3d91) 1; /* Darker gradient for dark mode */
+}
+
+body.dark-mode .search-bar input::placeholder {
+  color: #ccc; /* Lighter placeholder for dark mode */
+}
+
+body.dark-mode .search-icon {
+  color: #ccc; /* Lighter icon color for dark mode */
 }

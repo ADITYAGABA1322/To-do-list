@@ -10,6 +10,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [darkMode, setDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     document.body.className = darkMode ? 'dark-mode' : '';
@@ -40,15 +41,29 @@ function App() {
     setTodos(newTodos);
   };
 
-  const filteredTodos = todos.filter(todo =>
-    todo.text.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+  };
+
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'Completed') {
+      return todo.completed;
+    } else if (filter === 'Incomplete') {
+      return !todo.completed;
+    }
+    return todo.text.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="App">
       <div className="header">
         <h1>TODO LIST</h1>
-        <SearchBar setSearchTerm={setSearchTerm} darkMode={darkMode} setDarkMode={setDarkMode} />
+        <SearchBar
+          setSearchTerm={setSearchTerm}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+          handleFilterChange={handleFilterChange} 
+        />
       </div>
       {filteredTodos.length === 0 ? (
         <div className="no-notes">

@@ -3,23 +3,68 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  border: 1px solid #ddd;
   border-radius: 5px;
-  margin-bottom: 10px;
-  width: 1080px;
+  margin-bottom: 30px;
+  width: 425%; /* Adjust width as needed */
+  max-width: 1180px; /* Max width to maintain layout consistency */
+  position: relative;
+  background: white; /* Ensure background is white for notes */
+  left : -200px
 }
 
-.todo-item.completed {
+.todo-item.completed .todo-text {
   text-decoration: line-through;
-  color: gray;
+  color: gray; /* Gray text for completed notes */
 }
 
 .todo-item input[type="checkbox"] {
   accent-color: #6a11cb;
 }
 
-.todo-item button {
+.todo-item input[type="text"] {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 16px;
+  width: 1px;
+  flex: 1;
+}
+
+.todo-item .edit-button,
+.todo-item .delete-button {
   background: none;
   border: none;
   cursor: pointer;
+  font-size: 16px;
+  width: 5%; /* Reduced size of buttons */
+}
+
+.todo-item .edit-button {
+  color: #6a11cb;
+}
+
+.todo-item .delete-button {
+  color: red;
+}
+
+.todo-item::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6a11cb, transparent);
+  position: absolute;
+  left: -110px; /* Offset to the left */
+  right: -10px; /* Extend divider beyond note width */
+  bottom: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .todo-item {
+    background: var(--note-background); /* Dark mode background */
+    color: var(--text-color); /* Dark mode text color */
+  }
+
+  .todo-item.completed {
+    color: var(--completed-text-color); /* Light gray text for completed notes */
+  }
 }
