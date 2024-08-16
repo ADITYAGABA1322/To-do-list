@@ -6,19 +6,38 @@ import NewNoteModal from './components/NewNoteModal';
 import './App.css';
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const storedTheme = localStorage.getItem('current_theme');
+  const [theme, setTheme] = useState(storedTheme || 'dark');
+
+  useEffect(() => {
+    document.body.className = theme === 'dark' ? 'dark-mode' : '';
+    localStorage.setItem('current_theme', theme);
+    const themeInStorage = localStorage.getItem('current_theme');
+  }, [theme]);
+
+  const [todos, setTodos] = useState(() => {
+    const storedTodos = localStorage.getItem('todos');
+    if (storedTodos) {
+      console.log('Todos loaded from localStorage:', JSON.parse(storedTodos));
+    } else {
+      console.log('No todos found in localStorage, starting with an empty list.');
+    }
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  });
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
-    document.body.className = darkMode ? 'dark-mode' : '';
-  }, [darkMode]);
+    localStorage.setItem('todos', JSON.stringify(todos));
+    console.log('Todos saved to localStorage:', todos);
+  }, [todos]);
 
   const addTodo = (text) => {
     if (text) {
       setTodos([...todos, { text, completed: false }]);
+      console.log('Added new todo:', text);
     }
   };
 
@@ -27,12 +46,14 @@ function App() {
       const newTodos = [...todos];
       newTodos[index].text = newText;
       setTodos(newTodos);
+
     }
   };
 
   const deleteTodo = (index) => {
     const newTodos = todos.filter((_, i) => i !== index);
     setTodos(newTodos);
+
   };
 
   const toggleComplete = (index) => {
@@ -60,8 +81,8 @@ function App() {
         <h1>TODO LIST</h1>
         <SearchBar
           setSearchTerm={setSearchTerm}
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
+          darkMode={theme === 'dark'}
+          setDarkMode={(isDarkMode) => setTheme(isDarkMode ? 'dark' : 'light')}
           handleFilterChange={handleFilterChange} 
         />
       </div>
